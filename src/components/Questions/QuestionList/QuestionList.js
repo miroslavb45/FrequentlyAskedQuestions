@@ -11,9 +11,9 @@ class QuestionList extends Component {
           onClick={() => {
             this.questionSelectionHandler(question.id);
           }}
+          key={question.id}
         >
           <QuestionPreview
-            key={question.id}
             id={question.id}
             title={question.title}
             author={question.author}

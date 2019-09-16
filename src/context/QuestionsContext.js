@@ -3,7 +3,8 @@ import React from 'react';
 const questionsContext = React.createContext({
     questions: [],
     getQuestion: (id) => {},
-    setQuestion: (id, newQuestion) => {}
+    addNewAnswer: (question) => {},
+    deleteAnswer: (answerId, questionId) => {}
 });
 
 export default questionsContext;

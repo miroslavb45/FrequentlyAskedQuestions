@@ -11,24 +11,34 @@ class QuestionsRouter extends Component {
       {
         id: "quest1",
         title: "Question title",
-        author: {
-          username: "miroslavb45",
-          displayName: "Brnic Miroslav"
-        },
+        author: "miroslavb45",
         content:
           "Cillum esse elit occaecat excepteur Lorem aliquip enim occaecat dolor mollit ad tempor aliqua. Aliquip anim anim velit labore do mollit dolore officia. Id nulla exercitation cillum laborum quis laborum consectetur esse do. Irure cillum officia adipisicing nostrud. Aliqua sunt elit pariatur dolor fugiat velit cillum ipsum amet. Excepteur occaecat magna magna nulla anim irure deserunt quis proident velit.",
-        createDate: new Date().toDateString()
+        createDate: new Date().toDateString(),
+        answers: [
+          {
+            id: "answer1",
+            author: "testuser1",
+            content: "This is a short but good answer."
+          }
+        ],
+        correctAnswersId: null
       },
       {
         id: "quest2",
         title: "Question title 2",
-        author: {
-          username: "miroslavb45",
-          displayName: "Brnic Miroslav"
-        },
+        author: "miroslavb45",
         content:
           "Cillum esse elit occaecat excepteur Lorem aliquip enim occaecat dolor mollit ad tempor aliqua. Aliquip anim anim velit labore do mollit dolore officia. Id nulla exercitation cillum laborum quis laborum consectetur esse do. Irure cillum officia adipisicing nostrud. Aliqua sunt elit pariatur dolor fugiat velit cillum ipsum amet. Excepteur occaecat magna magna nulla anim irure deserunt quis proident velit.",
-        createDate: new Date().toDateString()
+        createDate: new Date().toDateString(),
+        answers: [
+          {
+            id: "answer1",
+            author: "testuser1",
+            content: "This is a short but good answer."
+          }
+        ],
+        correctAnswersId: null
       }
     ]
   };
@@ -38,7 +48,8 @@ class QuestionsRouter extends Component {
         value={{
           questions: this.state.questions,
           getQuestion: this.getQuestion,
-          setQuestion: this.setQuestion
+          addNewAnswer: this.addNewAnswer,
+          deleteAnswer: this.deleteAnswer
         }}
       >
         <ProtectedRoute path="/questions" exact component={QuestionList} />
@@ -47,11 +58,31 @@ class QuestionsRouter extends Component {
     );
   }
 
-  getQuestion = (id) => {
+  getQuestion = id => {
     return this.state.questions.find(question => question.id === id);
-  }
-  setQuestion = (question) => {
-    
+  };
+
+  addNewAnswer = answer => {
+    const newQuestions = [...this.state.questions];
+    let question = newQuestions.find(
+      question => question.id === answer.questionId
+    );
+    delete answer.questionId;  
+
+    question.answers.push(answer);
+    this.setState({ question: newQuestions });
+  };
+
+  deleteAnswer = (answerId,questionId) => {
+    const newQuestions = [...this.state.questions];
+    let question = newQuestions.find(
+      question => question.id === questionId
+    );
+
+    const answerToDelete = question.answers.find(answer => answer.id === answerId);
+    question.answers.splice(question.answers.indexOf(answerToDelete), 1);
+
+    this.setState({ question: newQuestions });
   }
 }
 
