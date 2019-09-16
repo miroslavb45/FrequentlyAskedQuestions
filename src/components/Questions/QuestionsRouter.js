@@ -48,6 +48,8 @@ class QuestionsRouter extends Component {
         value={{
           questions: this.state.questions,
           getQuestion: this.getQuestion,
+          addNewQuestion: this.addNewQuestion,
+          deleteQuestion: this.deleteQuestion,
           addNewAnswer: this.addNewAnswer,
           deleteAnswer: this.deleteAnswer
         }}
@@ -67,23 +69,38 @@ class QuestionsRouter extends Component {
     let question = newQuestions.find(
       question => question.id === answer.questionId
     );
-    delete answer.questionId;  
+    delete answer.questionId;
 
     question.answers.push(answer);
     this.setState({ question: newQuestions });
   };
 
-  deleteAnswer = (answerId,questionId) => {
+  deleteAnswer = (answerId, questionId) => {
     const newQuestions = [...this.state.questions];
-    let question = newQuestions.find(
-      question => question.id === questionId
-    );
+    let question = newQuestions.find(question => question.id === questionId);
 
-    const answerToDelete = question.answers.find(answer => answer.id === answerId);
+    const answerToDelete = question.answers.find(
+      answer => answer.id === answerId
+    );
     question.answers.splice(question.answers.indexOf(answerToDelete), 1);
 
     this.setState({ question: newQuestions });
+  };
+
+  addNewQuestion = question => {
+    const newQuestions = [...this.state.questions];
+    newQuestions.push(question)
+
+    this.setState({questions: newQuestions});
+  };
+
+  deleteQuestion = questionId => {
+    const newQuestions = [...this.state.questions];
+    let question = newQuestions.find(question => question.id === questionId);
+    newQuestions.splice(newQuestions.indexOf(question), 1);
+    this.setState({ questions: newQuestions });
   }
+
 }
 
 export default QuestionsRouter;

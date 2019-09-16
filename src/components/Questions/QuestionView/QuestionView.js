@@ -3,6 +3,7 @@ import QuestionsContext from "../../../context/QuestionsContext";
 import Answer from "../Answer/Answer";
 import Auth from "../../../authentication/Auth";
 import uuidv1 from "uuid/v1";
+import Validations from '../../../utils/Utils';
 
 class QuestionView extends Component {
   static contextType = QuestionsContext;
@@ -18,7 +19,7 @@ class QuestionView extends Component {
         <h1>{this.state.currentQuestion.title}</h1>
         <p>ID: {this.state.currentQuestion.id}</p>
         <p>Content. {this.state.currentQuestion.content}</p>
-        {/* <p>Author: {this.state.currentQuestion.author.displayName}</p> */}
+        <p>Author: {this.state.currentQuestion.author}</p>
         <p>Create Date: {this.state.currentQuestion.createDate}</p>
 
         <br></br>
@@ -37,8 +38,10 @@ class QuestionView extends Component {
         })}
         <br></br>
         <h1>Submit an answer:</h1>
-        <input type="text" onChange={this.newAnswerInputChangeHandler} />
-        <button onClick={this.submitNewAnswer}>Add new answer</button>
+        <form onSubmit={this.submitNewAnswer}>
+          <input type="text" onChange={this.newAnswerInputChangeHandler} />
+          <button type="submit">Add new answer</button>
+        </form>
       </div>
     );
   }
@@ -61,8 +64,13 @@ class QuestionView extends Component {
     };
   };
 
-  submitNewAnswer = () => {
-    this.context.addNewAnswer(this.newAnswer);
+  submitNewAnswer = event => {
+    event.preventDefault();
+    if (this.newAnswer && Validations.notStartingWithSpace.test(this.newAnswer.content)) {
+      this.context.addNewAnswer(this.newAnswer);
+    }else{
+        alert("Input validation failed!")
+    }
   };
 
   deleteAnswer = id => {

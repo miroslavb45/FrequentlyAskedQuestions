@@ -1,18 +1,27 @@
-import React from "react";
-import './QuestionPreview.css';
+import React, { useContext } from "react";
+import "./QuestionPreview.css";
+import QuestionsContext from "../../../context/QuestionsContext";
 
 const QuestionPreview = props => {
+  const context = useContext(QuestionsContext);
+
   return (
-  <div className="question-preview-wrapper">
-      <p>ID: {props.id}</p>
-      <p>Title: {props.title}</p>
-      <p>Content. {props.content}</p>
+    <div className="question-preview-wrapper">
+      <p contenteditable="true">ID: {props.id}</p>
+      <p onClick={() => props.onClick(props.id)}>
+        <span className="question-preveiw-title">Title: {props.title}</span>
+      </p>
+      <p>Content: {props.content}</p>
       <p>Author: {props.author.displayName}</p>
       <p>Create Date: {props.createDate}</p>
-  </div>
+      <button
+        key="deleteButton"
+        onClick={props.onDelete}
+      >
+        Delete
+      </button>
+    </div>
   );
 };
-
-
 
 export default QuestionPreview;
