@@ -51,7 +51,9 @@ class QuestionsRouter extends Component {
           addNewQuestion: this.addNewQuestion,
           deleteQuestion: this.deleteQuestion,
           addNewAnswer: this.addNewAnswer,
-          deleteAnswer: this.deleteAnswer
+          deleteAnswer: this.deleteAnswer,
+          updateQuestion: this.updateQuestion,
+          updateAnswer: this.updateAnswer
         }}
       >
         <ProtectedRoute path="/questions" exact component={QuestionList} />
@@ -99,6 +101,30 @@ class QuestionsRouter extends Component {
     let question = newQuestions.find(question => question.id === questionId);
     newQuestions.splice(newQuestions.indexOf(question), 1);
     this.setState({ questions: newQuestions });
+  }
+
+  updateQuestion = updatedQuestion => {
+    console.log(updatedQuestion)
+    const newQuestions = [...this.state.questions];
+    let questionToEdit = newQuestions.find(question => question.id === updatedQuestion.id);
+
+    questionToEdit.title = updatedQuestion.title;
+    questionToEdit.content = updatedQuestion.content;
+    this.setState({questions: newQuestions});
+    
+  }
+
+  updateAnswer = (questionId, answerId, answerContent) =>{
+    console.log(answerContent)
+    const newQuestions = [...this.state.questions];
+    const question = newQuestions.find(question => question.id === questionId);
+    const currentAnswers = question.answers;
+
+
+    const answerToUpdate = currentAnswers.find(answer => answer.id === answerId);
+    answerToUpdate.content = answerContent;
+
+    this.setState({questions: newQuestions})
   }
 
 }

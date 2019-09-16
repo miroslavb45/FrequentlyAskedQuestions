@@ -7,19 +7,18 @@ const QuestionPreview = props => {
 
   return (
     <div className="question-preview-wrapper">
-      <p contenteditable="true">ID: {props.id}</p>
+      <p>ID: {props.id}</p>
       <p onClick={() => props.onClick(props.id)}>
         <span className="question-preveiw-title">Title: {props.title}</span>
       </p>
       <p>Content: {props.content}</p>
-      <p>Author: {props.author.displayName}</p>
+      <p>Author: {props.author}</p>
       <p>Create Date: {props.createDate}</p>
-      <button
-        key="deleteButton"
-        onClick={props.onDelete}
-      >
-        Delete
-      </button>
+      {props.editable ? (
+        <button key="deleteButton" onClick={props.onDelete}>
+          Delete
+        </button>
+      ) : null}
     </div>
   );
 };

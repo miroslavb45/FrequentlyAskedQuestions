@@ -13,6 +13,9 @@ const Header = () => {
           <li>
             <NavLink to={"/questions/quest1"}>Question</NavLink>
           </li>
+          <li>
+            <NavLink to={"/logout"}>Logout</NavLink>
+          </li>
         </ul>
       </nav>
     </header>

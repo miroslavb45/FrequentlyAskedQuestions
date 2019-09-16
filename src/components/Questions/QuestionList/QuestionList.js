@@ -3,7 +3,7 @@ import QuestionPreview from "../QuestionPreview/QuestionPreview";
 import QuestionsContext from "../../../context/QuestionsContext";
 import Auth from "../../../authentication/Auth";
 import uuidv1 from "uuid/v1";
-import Validations from '../../../utils/Utils';
+import {Validations, isEditableByCurrentUser} from '../../../utils/Utils';
 
 class QuestionList extends Component {
   static contextType = QuestionsContext;
@@ -11,6 +11,8 @@ class QuestionList extends Component {
     return (
       <div>
         {this.context.questions.map(question => {
+            const isQuestionEditableByCurrentUser = isEditableByCurrentUser(question.author);
+            console.log(isQuestionEditableByCurrentUser)
           return (
             <QuestionPreview
               key={question.id}
@@ -20,6 +22,7 @@ class QuestionList extends Component {
               createDate={question.createDate}
               content={question.content}
               onClick={this.questionSelectionHandler}
+              editable={isQuestionEditableByCurrentUser}
               onDelete={() => this.context.deleteQuestion(question.id)}
             />
           );
@@ -41,7 +44,7 @@ class QuestionList extends Component {
     );
   }
 
-  componentDidMount() {}
+
   questionSelectionHandler = id => {
     this.props.history.push("/questions/" + id);
   };

@@ -11,12 +11,17 @@ import ProtectedRoute from './authentication/ProtectedRoute';
 
 
 class FrequentlyAskedQuestions extends Component {
+  constructor(props){
+super(props)
+  }
   render() {
     return (
       <BrowserRouter>
         <div className="App">
           <Header />
           <Route path="/login" exact component={Login}/>
+          <Route path="/logout" exact render={() => Auth.logout(() => {})}/>
+
           <QuestionsRouter/>
         </div>
       

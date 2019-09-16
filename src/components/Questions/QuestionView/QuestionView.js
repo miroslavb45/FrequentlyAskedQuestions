@@ -3,36 +3,64 @@ import QuestionsContext from "../../../context/QuestionsContext";
 import Answer from "../Answer/Answer";
 import Auth from "../../../authentication/Auth";
 import uuidv1 from "uuid/v1";
-import Validations from '../../../utils/Utils';
+import { Validations, isEditableByCurrentUser } from "../../../utils/Utils";
 
 class QuestionView extends Component {
   static contextType = QuestionsContext;
   state = {
     currentQuestion: {
       answers: []
-    }
+    },
+    editing: false
   };
 
   render() {
+    const isEditAllowed = isEditableByCurrentUser(
+      this.state.currentQuestion.author
+    );
+
     return (
       <div>
-        <h1>{this.state.currentQuestion.title}</h1>
+        <h1
+          contentEditable={this.state.editing}
+          onInput={this.titleChangeHandler}
+          suppressContentEditableWarning={true}
+        >
+          {this.state.currentQuestion.title}
+        </h1>
+
         <p>ID: {this.state.currentQuestion.id}</p>
-        <p>Content. {this.state.currentQuestion.content}</p>
+
+        <p
+          contentEditable={this.state.editing}
+          onInput={this.contentChangeHandler}
+          suppressContentEditableWarning={true}
+        >
+          {this.state.currentQuestion.content}
+        </p>
+
         <p>Author: {this.state.currentQuestion.author}</p>
         <p>Create Date: {this.state.currentQuestion.createDate}</p>
+        {this.isEditableByCurrentUser ? (
+          <button onClick={this.toggleEditingHandler}>
+            {this.state.editing ? "Save" : "Edit"}
+          </button>
+        ) : null}
 
         <br></br>
         <h1>Answers:</h1>
 
         {this.state.currentQuestion.answers.map(answer => {
+          const isDeleteAllowed = isEditableByCurrentUser(answer.author);
           return (
             <Answer
               key={answer.id}
               id={answer.id}
+              isDeleteAllowed={isDeleteAllowed}
               content={answer.content}
               author={answer.author}
               onDelete={this.deleteAnswer}
+              onUpdate={this.answerChangeHandler}
             />
           );
         })}
@@ -46,12 +74,51 @@ class QuestionView extends Component {
     );
   }
 
+  titleChangeHandler = event => {
+    const newTitle = event.target.innerText;
+    this.setState({ newTitle });
+  };
+
+  contentChangeHandler = event => {
+    const newContent = event.target.innerText;
+    this.setState({ newContent });
+  };
+
+  toggleEditingHandler = () => {
+    if (this.state.editing) {
+      const newQuestion = { ...this.state.currentQuestion };
+      newQuestion.title =
+        this.state.newTitle !== undefined
+          ? this.state.newTitle
+          : newQuestion.title;
+      newQuestion.content =
+        this.state.newContent !== undefined
+          ? this.state.newContent
+          : newQuestion.content;
+      this.context.updateQuestion(newQuestion);
+      this.setState({
+        editing: !this.state.editing,
+        currentQuestion: newQuestion
+      });
+    } else {
+      this.setState({ editing: !this.state.editing });
+    }
+  };
+
+  answerChangeHandler = (answerId, answerContent) => {
+    this.context.updateAnswer(
+      this.state.currentQuestion.id,
+      answerId,
+      answerContent
+    );
+  };
   componentDidMount() {
     this.loadQuestion();
   }
 
   loadQuestion() {
     const id = this.props.match.params.id;
+
     this.setState({ currentQuestion: this.context.getQuestion(id) });
   }
 
@@ -66,10 +133,13 @@ class QuestionView extends Component {
 
   submitNewAnswer = event => {
     event.preventDefault();
-    if (this.newAnswer && Validations.notStartingWithSpace.test(this.newAnswer.content)) {
+    if (
+      this.newAnswer &&
+      Validations.notStartingWithSpace.test(this.newAnswer.content)
+    ) {
       this.context.addNewAnswer(this.newAnswer);
-    }else{
-        alert("Input validation failed!")
+    } else {
+      alert("Input validation failed!");
     }
   };
 

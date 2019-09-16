@@ -4,10 +4,11 @@ const questionsContext = React.createContext({
     questions: [],
     getQuestion: (id) => {},
     addNewQuestion: (question) => {},
-    modifyQuestion: (question) => {},
+    updateQuestion: (question) => {},
     deleteQuestion: (question) => {},
     addNewAnswer: (question) => {},
-    deleteAnswer: (answerId, questionId) => {}
+    deleteAnswer: (answerId, questionId) => {},
+    updateAnswer: (questionId, answerId, answerContent) => {}
 });
 
 export default questionsContext;

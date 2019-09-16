@@ -1,6 +1,6 @@
 class Auth {
-    authenticated = true;
-    currentUser = "miroslav"
+    authenticated = false;
+    // currentUser = "miroslav"
 
     login = (username, callback) => {
         if (username !== undefined && username !== '') {
