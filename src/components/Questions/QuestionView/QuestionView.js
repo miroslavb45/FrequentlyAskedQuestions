@@ -18,6 +18,7 @@ class QuestionView extends Component {
     const isEditAllowed = isEditableByCurrentUser(
       this.state.currentQuestion.author
     );
+    const isAuthorTheActiveUser = this.state.currentQuestion.author === Auth.getActiveUser();
 
     return (
       <div>
@@ -41,11 +42,13 @@ class QuestionView extends Component {
 
         <p>Author: {this.state.currentQuestion.author}</p>
         <p>Create Date: {this.state.currentQuestion.createDate}</p>
-        {this.isEditableByCurrentUser ? (
-          <button onClick={this.toggleEditingHandler}>
+        {isEditAllowed ? [
+          <button key="editSaveButton" onClick={this.toggleEditingHandler}>
             {this.state.editing ? "Save" : "Edit"}
-          </button>
-        ) : null}
+          </button>, <button key="deleteButton" onClick={this.deleteQuestion}>Delete</button>]
+     : null}
+    
+
 
         <br></br>
         <h1>Answers:</h1>
@@ -57,10 +60,13 @@ class QuestionView extends Component {
               key={answer.id}
               id={answer.id}
               isDeleteAllowed={isDeleteAllowed}
+              toggleCorrectAnswerButtonVisible={isAuthorTheActiveUser}
               content={answer.content}
               author={answer.author}
               onDelete={this.deleteAnswer}
               onUpdate={this.answerChangeHandler}
+              questionId={this.state.currentQuestion.id}
+              isCorrect={answer.isCorrect}
             />
           );
         })}
@@ -138,6 +144,8 @@ class QuestionView extends Component {
       Validations.notStartingWithSpace.test(this.newAnswer.content)
     ) {
       this.context.addNewAnswer(this.newAnswer);
+      event.target.reset();
+      this.newAnswer = null;
     } else {
       alert("Input validation failed!");
     }
@@ -146,6 +154,11 @@ class QuestionView extends Component {
   deleteAnswer = id => {
     this.context.deleteAnswer(id, this.state.currentQuestion.id);
   };
+
+  deleteQuestion = () => {
+      this.context.deleteQuestion(this.state.currentQuestion.id);
+      this.props.history.push('/questions');
+  }
 }
 
 export default QuestionView;

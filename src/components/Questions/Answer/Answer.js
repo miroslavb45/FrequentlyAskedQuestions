@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import {Validations} from "../../../utils/Utils";
+import QuestionsContext from "../../../context/QuestionsContext";
+
 
 class Answer extends Component {
+  static contextType = QuestionsContext;
   state = {
     editing: false,
     content: this.props.content
@@ -33,6 +36,9 @@ class Answer extends Component {
          ] : (
             null
         )}
+        {this.props.toggleCorrectAnswerButtonVisible ? (
+           <button onClick={this.toggleCorrectAnswerHandler}>{this.props.isCorrect ? "Unmark" : "Mark as correct"}</button>
+        ) : null}
         
       </div>
     );
@@ -51,6 +57,9 @@ class Answer extends Component {
       this.props.onUpdate(this.props.id, this.state.newContent);
     }
   };
+  toggleCorrectAnswerHandler = () => {
+    this.context.toggleCorrectAnswer(this.props.id, this.props.questionId);
+  } 
 }
 
 export default Answer;

@@ -1,10 +1,7 @@
-import React, { useContext } from "react";
+import React from "react";
 import "./QuestionPreview.css";
-import QuestionsContext from "../../../context/QuestionsContext";
 
 const QuestionPreview = props => {
-  const context = useContext(QuestionsContext);
-
   return (
     <div className="question-preview-wrapper">
       <p>ID: {props.id}</p>
@@ -19,6 +16,8 @@ const QuestionPreview = props => {
           Delete
         </button>
       ) : null}
+      <p>Number of answers: {props.numberOfAnswers}</p>
+      {props.hasCorrectAnswer ? <p>Question Answered</p> : null}
     </div>
   );
 };

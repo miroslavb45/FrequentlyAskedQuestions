@@ -1,45 +1,30 @@
 import React, { Component } from "react";
 import QuestionList from "./QuestionList/QuestionList";
-import { BrowserRouter, Route } from "react-router-dom";
 import QuestionView from "./QuestionView/QuestionView";
 import QuestionsContext from "../../context/QuestionsContext";
 import ProtectedRoute from "../../authentication/ProtectedRoute";
+import QuestionsCreate from "./QuestionCreate/QuestionsCreate";
+import Auth from "../../authentication/Auth";
+import AnswerEntity from "../../entities/AnswerEntity";
+import QuestionEntity from "../../entities/QuestionEntity";
 
 class QuestionsRouter extends Component {
   state = {
     questions: [
-      {
-        id: "quest1",
-        title: "Question title",
-        author: "miroslavb45",
-        content:
-          "Cillum esse elit occaecat excepteur Lorem aliquip enim occaecat dolor mollit ad tempor aliqua. Aliquip anim anim velit labore do mollit dolore officia. Id nulla exercitation cillum laborum quis laborum consectetur esse do. Irure cillum officia adipisicing nostrud. Aliqua sunt elit pariatur dolor fugiat velit cillum ipsum amet. Excepteur occaecat magna magna nulla anim irure deserunt quis proident velit.",
-        createDate: new Date().toDateString(),
-        answers: [
-          {
-            id: "answer1",
-            author: "testuser1",
-            content: "This is a short but good answer."
-          }
-        ],
-        correctAnswersId: null
-      },
-      {
-        id: "quest2",
-        title: "Question title 2",
-        author: "miroslavb45",
-        content:
-          "Cillum esse elit occaecat excepteur Lorem aliquip enim occaecat dolor mollit ad tempor aliqua. Aliquip anim anim velit labore do mollit dolore officia. Id nulla exercitation cillum laborum quis laborum consectetur esse do. Irure cillum officia adipisicing nostrud. Aliqua sunt elit pariatur dolor fugiat velit cillum ipsum amet. Excepteur occaecat magna magna nulla anim irure deserunt quis proident velit.",
-        createDate: new Date().toDateString(),
-        answers: [
-          {
-            id: "answer1",
-            author: "testuser1",
-            content: "This is a short but good answer."
-          }
-        ],
-        correctAnswersId: null
-      }
+      new QuestionEntity(
+        "quest1",
+        "miroslavb45",
+        "Question title",
+        "Cillum esse elit occaecat excepteur Lorem aliquip enim occaecat dolor mollit ad tempor aliqua. Aliquip anim anim velit labore do mollit dolore officia. Id nulla exercitation cillum laborum quis laborum consectetur esse do. Irure cillum officia adipisicing nostrud. Aliqua sunt elit pariatur dolor fugiat velit cillum ipsum amet. Excepteur occaecat magna magna nulla anim irure deserunt quis proident velit.",
+        [new AnswerEntity("id1", "miroslavb45", "Sunt nisi eu elit officia officia officia laborum duis pariatur ipsum id....")]
+      ),
+      new QuestionEntity(
+        "quest2",
+        "miroslavb45",
+        "Question title 2",
+        "Cillum esse elit occaecat excepteur Lorem aliquip enim occaecat dolor mollit ad tempor aliqua. Aliquip anim anim velit labore do mollit dolore officia. Id nulla exercitation cillum laborum quis laborum consectetur esse do. Irure cillum officia adipisicing nostrud. Aliqua sunt elit pariatur dolor fugiat velit cillum ipsum amet. Excepteur occaecat magna magna nulla anim irure deserunt quis proident velit.",
+        [new AnswerEntity("id2", "miroslavb45", "Tempor id ipsum exercitation eiusmod id ipsum reprehenderit elit et excepteur mollit est consectetur.")]
+      )
     ]
   };
   render() {
@@ -53,11 +38,29 @@ class QuestionsRouter extends Component {
           addNewAnswer: this.addNewAnswer,
           deleteAnswer: this.deleteAnswer,
           updateQuestion: this.updateQuestion,
-          updateAnswer: this.updateAnswer
+          updateAnswer: this.updateAnswer,
+          toggleCorrectAnswer: this.toggleCorrectAnswer
         }}
       >
         <ProtectedRoute path="/questions" exact component={QuestionList} />
-        <ProtectedRoute path={"/questions/:id"} component={QuestionView} />
+        <ProtectedRoute
+          path="/my-questions"
+          exact
+          component={props => (
+            <QuestionList {...props} filterByAuthor={Auth.getActiveUser()} />
+          )}
+        />
+
+        <ProtectedRoute
+          path={"/questions/:id"}
+          exact
+          component={QuestionView}
+        />
+        <ProtectedRoute
+          path="/new-question"
+          exact
+          component={QuestionsCreate}
+        />
       </QuestionsContext.Provider>
     );
   }
@@ -91,9 +94,9 @@ class QuestionsRouter extends Component {
 
   addNewQuestion = question => {
     const newQuestions = [...this.state.questions];
-    newQuestions.push(question)
+    newQuestions.push(question);
 
-    this.setState({questions: newQuestions});
+    this.setState({ questions: newQuestions });
   };
 
   deleteQuestion = questionId => {
@@ -101,32 +104,40 @@ class QuestionsRouter extends Component {
     let question = newQuestions.find(question => question.id === questionId);
     newQuestions.splice(newQuestions.indexOf(question), 1);
     this.setState({ questions: newQuestions });
-  }
+  };
 
   updateQuestion = updatedQuestion => {
-    console.log(updatedQuestion)
     const newQuestions = [...this.state.questions];
-    let questionToEdit = newQuestions.find(question => question.id === updatedQuestion.id);
+    let questionToEdit = newQuestions.find(
+      question => question.id === updatedQuestion.id
+    );
 
     questionToEdit.title = updatedQuestion.title;
     questionToEdit.content = updatedQuestion.content;
-    this.setState({questions: newQuestions});
-    
-  }
+    this.setState({ questions: newQuestions });
+  };
 
-  updateAnswer = (questionId, answerId, answerContent) =>{
-    console.log(answerContent)
+  updateAnswer = (questionId, answerId, answerContent) => {
     const newQuestions = [...this.state.questions];
     const question = newQuestions.find(question => question.id === questionId);
     const currentAnswers = question.answers;
 
-
-    const answerToUpdate = currentAnswers.find(answer => answer.id === answerId);
+    const answerToUpdate = currentAnswers.find(
+      answer => answer.id === answerId
+    );
     answerToUpdate.content = answerContent;
 
-    this.setState({questions: newQuestions})
-  }
+    this.setState({ questions: newQuestions });
+  };
 
+  toggleCorrectAnswer = (answerId, questionId) => {
+    const newQuestions = [...this.state.questions];
+    const question = newQuestions.find(question => question.id === questionId);
+    const answer = question.answers.find(answer => answer.id === answerId);
+    answer.isCorrect = !answer.isCorrect;
+
+    this.setState({ questions: newQuestions });
+  };
 }
 
 export default QuestionsRouter;

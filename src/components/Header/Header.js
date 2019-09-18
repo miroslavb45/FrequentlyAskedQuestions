@@ -11,11 +11,15 @@ const Header = () => {
             <NavLink to="/questions">Questions</NavLink>
           </li>
           <li>
-            <NavLink to={"/questions/quest1"}>Question</NavLink>
+            <NavLink to={"/my-questions"}>My Questions</NavLink>
+          </li>
+          <li>
+            <NavLink to={"/new-question"}>Create</NavLink>
           </li>
           <li>
             <NavLink to={"/logout"}>Logout</NavLink>
           </li>
+         
         </ul>
       </nav>
     </header>

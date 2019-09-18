@@ -11,12 +11,14 @@ export default class Login extends Component {
           <img src={userPlacholder} alt="" />
           <h1>Welcome</h1>
 
+          <form>
+
           <span>
             <label>Username</label>
             <input type="text" onChange={this.usernameChangeHandler}></input>
           </span>
           <button
-            onClick={() => {
+            onClick={(e) => {e.preventDefault();
               Auth.login(this.username, () => {
                 this.props.history.push("/questions");
               });
@@ -24,6 +26,7 @@ export default class Login extends Component {
           >
             Login
           </button>
+          </form>
         </div>
       </div>
     );
