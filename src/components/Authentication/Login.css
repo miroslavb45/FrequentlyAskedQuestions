@@ -1,0 +1,149 @@
+.Login {
+  right: 0;
+  background: #282c2d;
+  background: linear-gradient(45deg, #282c2d 0%, #181818 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#282c2d', endColorstr='#181818',GradientType=1 );
+  bottom: 0;
+  top: 0;
+  left: 0;
+  position: absolute;
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 1;
+}
+
+.wrapper {
+  position: relative;
+  width: 385px;
+  height: 284px;
+  background-color: rgb(239, 239, 238);
+  border-radius: 17px;
+  box-shadow: 0px 8px 29.76px 2.24px rgba(48, 48, 48, 0.35);
+}
+
+.wrapper h1 {
+  margin-top: 76px;
+  font-family: "Montserrat";
+  color: rgb(22, 22, 23);
+  line-height: 1.2;
+  font-size: 32px;
+  font-weight: 400;
+}
+
+.wrapper img {
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  position: absolute;
+  overflow: hidden;
+  top: -50px;
+  border-radius: 50%;
+  height: 112px;
+}
+
+.wrapper input {
+  width: 293px;
+  border-radius: 15px;
+  border-width: 0.8px;
+  border-style: solid;
+
+  border-color: rgb(255, 213, 92);
+  height: 35px;
+  padding-left: 11px;
+  color: rgb(22, 22, 23);
+  outline: none;
+  font-weight: 300;
+  background: transparent;
+}
+
+.wrapper label {
+  display: block;
+  margin-left: -218px;
+  font-size: 14px;
+  font-family: "Montserrat";
+  color: rgb(22, 22, 23);
+  line-height: 1.2;
+  margin-bottom: 5px;
+  font-weight: 300;
+}
+
+.wrapper button {
+  display: block;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 216px;
+  border-radius: 15px;
+  padding: 7px;
+  font-family: "Montserrat";
+  line-height: 1.2;
+
+  font-size: 20px;
+  background-color: rgb(245, 200, 71);
+  border: none;
+  box-shadow: 0px 1px 3.72px 0.28px rgba(59, 88, 138, 0.35);
+  color: rgb(239, 239, 238);
+  outline: none;
+  width: 305px;
+  height: 39px;
+}
+
+.wrapper button:hover {
+  background-color: rgb(24, 24, 23);
+  color: white;
+  cursor: pointer;
+}
+
+.Login .dots {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+}
+
+.Login .App {
+  overflow: hidden;
+}
+.Login .Sidebar {
+  display: none;
+}
+.bottom-line {
+  background-color: rgb(245, 200, 71);
+  position: absolute;
+  left: 0;
+  width: 100%;
+  right: 0;
+  bottom: 0;
+  height: 25px;
+}
+
+.question-mark-line {
+  position: absolute;
+
+  bottom: 35px;
+
+  background-color: rgb(245, 200, 71);
+  height: 7px;
+}
+
+.question-mark-bottom-part {
+  position: absolute;
+  left: 113px;
+  bottom: 0;
+  width: 40px;
+  border-left: 7px solid rgb(245, 200, 71);
+  border-top: 7px solid rgb(245, 200, 71);
+  height: 50px;
+  border-right: 7px solid rgb(245, 200, 71);
+}
+
+.question-mark-top {
+  left: 48px;
+  position: absolute;
+  bottom: 70px;
+  width: 178px;
+}

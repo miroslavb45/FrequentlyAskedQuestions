@@ -7,6 +7,9 @@ import QuestionsCreate from "./QuestionCreate/QuestionsCreate";
 import Auth from "../../authentication/Auth";
 import AnswerEntity from "../../entities/AnswerEntity";
 import QuestionEntity from "../../entities/QuestionEntity";
+import Sidebar from "../Sidebar/Sidebar";
+import Header from "../Header/Header";
+import { Redirect, Route } from "react-router-dom";
 
 class QuestionsRouter extends Component {
   state = {
@@ -16,17 +19,30 @@ class QuestionsRouter extends Component {
         "miroslavb45",
         "Question title",
         "Cillum esse elit occaecat excepteur Lorem aliquip enim occaecat dolor mollit ad tempor aliqua. Aliquip anim anim velit labore do mollit dolore officia. Id nulla exercitation cillum laborum quis laborum consectetur esse do. Irure cillum officia adipisicing nostrud. Aliqua sunt elit pariatur dolor fugiat velit cillum ipsum amet. Excepteur occaecat magna magna nulla anim irure deserunt quis proident velit.",
-        [new AnswerEntity("id1", "miroslavb45", "Sunt nisi eu elit officia officia officia laborum duis pariatur ipsum id....")]
+        [
+          new AnswerEntity(
+            "id1",
+            "miroslavb45",
+            "Sunt nisi eu elit officia officia officia laborum duis pariatur ipsum id...."
+          )
+        ]
       ),
       new QuestionEntity(
         "quest2",
         "miroslavb45",
         "Question title 2",
         "Cillum esse elit occaecat excepteur Lorem aliquip enim occaecat dolor mollit ad tempor aliqua. Aliquip anim anim velit labore do mollit dolore officia. Id nulla exercitation cillum laborum quis laborum consectetur esse do. Irure cillum officia adipisicing nostrud. Aliqua sunt elit pariatur dolor fugiat velit cillum ipsum amet. Excepteur occaecat magna magna nulla anim irure deserunt quis proident velit.",
-        [new AnswerEntity("id2", "miroslavb45", "Tempor id ipsum exercitation eiusmod id ipsum reprehenderit elit et excepteur mollit est consectetur.")]
+        [
+          new AnswerEntity(
+            "id2",
+            "miroslavb45",
+            "Tempor id ipsum exercitation eiusmod id ipsum reprehenderit elit et excepteur mollit est consectetur."
+          )
+        ]
       )
     ]
   };
+
   render() {
     return (
       <QuestionsContext.Provider
@@ -39,28 +55,35 @@ class QuestionsRouter extends Component {
           deleteAnswer: this.deleteAnswer,
           updateQuestion: this.updateQuestion,
           updateAnswer: this.updateAnswer,
-          toggleCorrectAnswer: this.toggleCorrectAnswer
+          toggleCorrectAnswer: this.toggleCorrectAnswer,
+          filterValue: this.state.filterValue
         }}
       >
-        <ProtectedRoute path="/questions" exact component={QuestionList} />
-        <ProtectedRoute
-          path="/my-questions"
-          exact
-          component={props => (
-            <QuestionList {...props} filterByAuthor={Auth.getActiveUser()} />
-          )}
-        />
+        <Sidebar>
+          <Header onFilterChange={this.onFilterChange} />
+          <Route to="/" exact>
+            <Redirect to="/questions"></Redirect>
+          </Route>
+          <ProtectedRoute path="/questions" exact component={QuestionList} />
+          <ProtectedRoute
+            path="/my-questions"
+            exact
+            component={props => (
+              <QuestionList {...props} filterByAuthor={Auth.getActiveUser()} />
+            )}
+          />
 
-        <ProtectedRoute
-          path={"/questions/:id"}
-          exact
-          component={QuestionView}
-        />
-        <ProtectedRoute
-          path="/new-question"
-          exact
-          component={QuestionsCreate}
-        />
+          <ProtectedRoute
+            path={"/questions/:id"}
+            exact
+            component={QuestionView}
+          />
+          <ProtectedRoute
+            path="/new-question"
+            exact
+            component={QuestionsCreate}
+          />
+        </Sidebar>
       </QuestionsContext.Provider>
     );
   }
@@ -99,11 +122,12 @@ class QuestionsRouter extends Component {
     this.setState({ questions: newQuestions });
   };
 
-  deleteQuestion = questionId => {
+  deleteQuestion = (questionId, callback) => {
     const newQuestions = [...this.state.questions];
     let question = newQuestions.find(question => question.id === questionId);
     newQuestions.splice(newQuestions.indexOf(question), 1);
-    this.setState({ questions: newQuestions });
+
+    this.setState({ questions: newQuestions }, callback(newQuestions));
   };
 
   updateQuestion = updatedQuestion => {
@@ -137,6 +161,9 @@ class QuestionsRouter extends Component {
     answer.isCorrect = !answer.isCorrect;
 
     this.setState({ questions: newQuestions });
+  };
+  onFilterChange = e => {
+    this.setState({ filterValue: e });
   };
 }
 

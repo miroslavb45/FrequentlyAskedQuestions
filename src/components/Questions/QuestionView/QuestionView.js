@@ -18,7 +18,8 @@ class QuestionView extends Component {
     const isEditAllowed = isEditableByCurrentUser(
       this.state.currentQuestion.author
     );
-    const isAuthorTheActiveUser = this.state.currentQuestion.author === Auth.getActiveUser();
+    const isAuthorTheActiveUser =
+      this.state.currentQuestion.author === Auth.getActiveUser();
 
     return (
       <div>
@@ -42,13 +43,16 @@ class QuestionView extends Component {
 
         <p>Author: {this.state.currentQuestion.author}</p>
         <p>Create Date: {this.state.currentQuestion.createDate}</p>
-        {isEditAllowed ? [
-          <button key="editSaveButton" onClick={this.toggleEditingHandler}>
-            {this.state.editing ? "Save" : "Edit"}
-          </button>, <button key="deleteButton" onClick={this.deleteQuestion}>Delete</button>]
-     : null}
-    
-
+        {isEditAllowed
+          ? [
+              <button key="editSaveButton" onClick={this.toggleEditingHandler}>
+                {this.state.editing ? "Save" : "Edit"}
+              </button>,
+              <button key="deleteButton" onClick={this.deleteQuestion}>
+                Delete
+              </button>
+            ]
+          : null}
 
         <br></br>
         <h1>Answers:</h1>
@@ -156,9 +160,9 @@ class QuestionView extends Component {
   };
 
   deleteQuestion = () => {
-      this.context.deleteQuestion(this.state.currentQuestion.id);
-      this.props.history.push('/questions');
-  }
+    this.context.deleteQuestion(this.state.currentQuestion.id);
+    this.props.history.push("/questions");
+  };
 }
 
 export default QuestionView;

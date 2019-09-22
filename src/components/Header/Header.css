@@ -1,28 +1,66 @@
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
+header h1 {
+  color: #f5c847;
+  margin: 0;
+  font-size: 16px;
+  font-family: "Montserrat";
+  font-weight: 400;
 }
 
-li {
-    float: left;
+.logoText {
+  padding: 13px;
+}
+.searchBar {
+  position: absolute;
+  top: 9px;
+  right: 245px;
+}
+.searchBar input {
+  width: 270px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  font-family: "Montserrat";
+  padding: 5px;
+  padding-left: 9px;
+  font-size: 14px;
+}
+.searchBar img {
+  position: absolute;
+  top: 5px;
+  right: 8px;
 }
 
-li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
+.userInfo img {
+  position: absolute;
+  right: 34px;
+  top: 10px;
+}
+.userInfo {
+  position: absolute;
+  top: 5px;
+  right: 0;
+  width: 230px;
+  border-left: 1px solid gray;
+  height: 36px;
 }
 
-
-li a:hover {
-    background-color: #111;
+.userInfo span {
+  font-size: 16px;
+  font-family: "Montserrat";
+  color: rgb(245, 200, 71);
+  line-height: 1.2;
+  position: absolute;
+  top: 8px;
+  left: 12px;
 }
 
-.active {
-    color: orange;
+header {
+  height: 45px;
+  z-index: 10;
+  background-color: #4d4d4d;
+  position: fixed;
+  top: 0;
+  left: 45px;
+  right: 0;
+  transition: left 0.5s;
 }

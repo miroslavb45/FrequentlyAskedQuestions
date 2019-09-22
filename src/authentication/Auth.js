@@ -1,28 +1,25 @@
 class Auth {
-    authenticated = false;
-    // currentUser = "miroslav"
+  authenticated = false;
 
-    login = (username, callback) => {
-        if (username !== undefined && username !== '') {
-            this.authenticated = true;
-            this.currentUser = username;
-            callback();
-        } else {
-            alert("Please enter a username");
-        }
-
+  login = (username, callback) => {
+    if (username !== undefined && username !== "") {
+      this.authenticated = true;
+      this.currentUser = username;
+      callback();
+    } else {
+      alert("Please enter a username");
     }
+  };
 
-    logout = (callback) => {
-        this.authenticated = false;
-        callback();
-    }
+  logout = () => {
+    this.authenticated = false;
+  };
 
-    isAuthenticated = () => {
-        return this.authenticated;
-    };
-    getActiveUser = () => {
-        return this.currentUser
-    };
+  isAuthenticated = () => {
+    return this.authenticated;
+  };
+  getActiveUser = () => {
+    return this.currentUser;
+  };
 }
 export default new Auth();

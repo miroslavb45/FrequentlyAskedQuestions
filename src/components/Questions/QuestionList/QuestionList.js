@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import QuestionPreview from "../QuestionPreview/QuestionPreview";
 import QuestionsContext from "../../../context/QuestionsContext";
 import { isEditableByCurrentUser } from "../../../utils/Utils";
-import QuestionsCreate from "../QuestionCreate/QuestionsCreate";
+import "./QuestionList.css";
 
 class QuestionList extends Component {
   static contextType = QuestionsContext;
@@ -13,12 +13,19 @@ class QuestionList extends Component {
 
   render() {
     return (
-      <div>
-        <input onChange={this.filterChangeHandler}></input>
+      <div className="questionList">
+        <h1>Questions</h1>
         {this.state.questions
           .filter(question =>
             this.props.filterByAuthor
               ? question.author === this.props.filterByAuthor
+              : true
+          )
+          .filter(question =>
+            this.context.filterValue
+              ? question.title
+                  .toLowerCase()
+                  .includes(this.context.filterValue.toLowerCase())
               : true
           )
           .map(question => {
@@ -37,14 +44,14 @@ class QuestionList extends Component {
                 content={question.content}
                 onClick={this.questionSelectionHandler}
                 editable={isQuestionEditableByCurrentUser}
-                onDelete={() => this.context.deleteQuestion(question.id)}
+                onDelete={this.onDelete}
                 numberOfAnswers={question.answers.length}
                 hasCorrectAnswer={hasCorrectAnswer}
               />
             );
           })}
-
-        <QuestionsCreate {...this.props} />
+        {/* 
+        <QuestionsCreate {...this.props} /> */}
       </div>
     );
   }
@@ -57,6 +64,12 @@ class QuestionList extends Component {
       questions: this.context.questions.filter(question =>
         question.title.toLowerCase().includes(event.target.value.toLowerCase())
       )
+    });
+  };
+
+  onDelete = question => {
+    this.context.deleteQuestion(question.id, newQuestions => {
+      this.setState({ questions: newQuestions });
     });
   };
 }

@@ -1,10 +1,143 @@
 .question-preview-wrapper {
-    border: 1px solid black;
-    margin: 10px;
-    padding: 10px;
+  border: 1px solid black;
+  display: flex;
+  margin-bottom: 25px;
+  background-color: #fefefe;
+  position: relative;
+  -webkit-box-shadow: 0px 0px 31px -14px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 31px -14px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 31px -14px rgba(0, 0, 0, 0.75);
 }
 
 .question-preveiw-title:hover {
-    color: blue;
-    cursor: pointer;
+  color: blue;
+  cursor: pointer;
+}
+
+.indicator {
+  width: 28px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #ffcc33;
+}
+
+.content {
+  padding: 12px;
+  padding-top: 20px;
+  padding-left: 25px;
+  margin-right: 190px;
+  margin-left: 29px;
+  height: 146px;
+}
+
+.content h2 {
+  color: #101820;
+  font-family: "Montserrat";
+  font-size: 20px;
+  margin: 0;
+}
+
+.content h2:hover {
+  cursor: pointer;
+  color: #ffcc33;
+}
+.content .contentWrapper {
+  overflow: hidden;
+  height: 80px;
+  margin-bottom: 20px;
+}
+.content .correct-answer-label {
+  font-family: "Montserrat";
+  font-size: 16px;
+  color: #33cc33;
+}
+
+.indicator img {
+  position: absolute;
+  bottom: 12px;
+  left: 4px;
+}
+
+.content .contentWrapper::before {
+  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, white 50%);
+  content: "\200C";
+  display: block;
+  position: absolute;
+  right: 144px;
+  top: 106px;
+  width: 25%;
+  text-align: center;
+}
+
+.content p {
+  color: #101820;
+  font-family: "Montserrat";
+  font-size: 14px;
+  line-height: 1.2;
+  margin-top: 15px;
+}
+
+.labels {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 177px;
+  border-left: 1px solid #ffcc33;
+  padding: 10px;
+  padding-top: 22px;
+  font-family: "Montserrat";
+  font-weight: 400;
+}
+
+.labels .answers-label span {
+  position: absolute;
+  left: 30px;
+  top: 2px;
+}
+
+.labels .answers-label {
+  position: relative;
+  margin-left: 2px;
+}
+.labels .date-label {
+  position: relative;
+  margin-top: 15px;
+  margin-left: 2px;
+}
+.labels .date-label span {
+  position: absolute;
+  left: 30px;
+  top: 3px;
+}
+.labels .date-label img {
+  position: absolute;
+  left: 1px;
+}
+
+.labels .author-label {
+  position: absolute;
+  bottom: 10px;
+  left: 13px;
+}
+.labels .author-label span {
+  position: absolute;
+  left: 30px;
+}
+
+.delete-button {
+  position: absolute;
+  bottom: 10px;
+  right: 264px;
+  cursor: pointer;
+}
+
+.delete-button span {
+  position: absolute;
+  top: 1px;
+  margin-left: 5px;
+  font-family: "Montserrat";
+  color: #ec0e18;
 }

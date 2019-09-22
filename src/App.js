@@ -1,27 +1,27 @@
 import React, { Component } from "react";
 import "./App.css";
-import Login from "./components/Login/Login";
+import Login from "./components/Authentication/Login";
+import Logout from "./components/Authentication/Logout";
 import QuestionsRouter from "./components/Questions/QuestionsRouter";
 import { BrowserRouter } from "react-router-dom";
 import { Route } from "react-router-dom";
-import Header from "./components/Header/Header";
-import Auth from './authentication/Auth';
-
-
-
+import dots from "./assets/dots-png-3.png";
 
 class FrequentlyAskedQuestions extends Component {
   render() {
     return (
-      <BrowserRouter>
-        <div className="App">
-          <Header />
-          <Route path="/login" exact component={Login}/>
-          <Route path="/logout" exact render={() => Auth.logout(() => {})}/>
-          <QuestionsRouter/>
-        </div>
-      
-      </BrowserRouter>
+      <div
+        className="App"
+        style={{
+          backgroundImage: `url(${dots}), linear-gradient(45deg, #282c2d 0%,#181818 100%)`
+        }}
+      >
+        <BrowserRouter>
+          <Route path="/login" exact component={Login} />
+          <Route path="/logout" exact component={Logout}></Route>
+          <QuestionsRouter />
+        </BrowserRouter>
+      </div>
     );
   }
 }

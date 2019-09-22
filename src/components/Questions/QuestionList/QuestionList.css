@@ -1,0 +1,14 @@
+.questionList {
+  margin-top: 45px;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+.questionList h1 {
+  margin-top: 55px;
+  font-size: 24px;
+  margin-left: 0;
+  font-family: "Montserrat";
+  font-weight: 400;
+  color: #ffffff;
+}

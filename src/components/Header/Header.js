@@ -1,29 +1,36 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 import "./Header.css";
+import logout from "../../assets/icons/logout.png";
+import Auth from "../../authentication/Auth";
+import { withRouter } from "react-router-dom";
+import searchIcon from "../../assets/icons/search.png";
 
-const Header = () => {
+const Header = props => {
+  const searchInputChangeHandler = e => {
+    props.onFilterChange(e.target.value);
+  };
   return (
-    <header>
-      <nav>
-        <ul>
-          <li>
-            <NavLink to="/questions">Questions</NavLink>
-          </li>
-          <li>
-            <NavLink to={"/my-questions"}>My Questions</NavLink>
-          </li>
-          <li>
-            <NavLink to={"/new-question"}>Create</NavLink>
-          </li>
-          <li>
-            <NavLink to={"/logout"}>Logout</NavLink>
-          </li>
-         
-        </ul>
-      </nav>
+    <header id="header">
+      <div className="logoText">
+        <h1>Frequently Asked Questions</h1>
+      </div>
+      <div className="searchBar">
+        <input onChange={searchInputChangeHandler}></input>
+        <img src={searchIcon} alt="" />
+      </div>
+
+      <div className="userInfo">
+        <span>Hi, {Auth.getActiveUser()}</span>
+        <img
+          src={logout}
+          alt=""
+          onClick={() => {
+            props.history.push("/logout");
+          }}
+        />
+      </div>
     </header>
   );
 };
 
-export default Header;
+export default React.memo(withRouter(Header));
