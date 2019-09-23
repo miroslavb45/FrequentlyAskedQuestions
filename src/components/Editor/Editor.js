@@ -10,7 +10,7 @@ class NewEditor extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.quill = React.createRef();
   }
- modules = {
+  modules = {
     toolbar: [
       [{ font: [] }, { size: [] }],
       ["bold", "italic", "underline", "strike"],
@@ -49,7 +49,6 @@ class NewEditor extends React.Component {
   };
 
   render() {
-   
     return (
       <ReactQuill
         ref={this.quill}

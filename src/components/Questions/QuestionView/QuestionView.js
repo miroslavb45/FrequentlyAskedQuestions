@@ -14,6 +14,7 @@ import deleteIcon from "../../../assets/icons/delete-icon.png";
 import editIcon from "../../../assets/icons/edit-icon.png";
 import saveIcon from "../../../assets/icons/save-icon.png";
 import Editor from "../../Editor/Editor";
+import AnswerEntity from "../../../entities/AnswerEntity";
 
 class QuestionView extends Component {
   static contextType = QuestionsContext;
@@ -113,6 +114,7 @@ class QuestionView extends Component {
                 toggleCorrectAnswerButtonVisible={isAuthorTheActiveUser}
                 content={answer.content}
                 author={answer.author}
+                createDate={answer.createDate}
                 onDelete={this.deleteAnswer}
                 onUpdate={this.answerChangeHandler}
                 questionId={this.state.currentQuestion.id}
@@ -137,11 +139,6 @@ class QuestionView extends Component {
             </form>
           </div>
         </div>
-
-        {/* <form onSubmit={this.submitNewAnswer}>
-          <input type="text" onChange={this.newAnswerInputChangeHandler} />
-          <button type="submit">Add new answer</button>
-        </form> */}
       </div>
     );
   }
@@ -198,26 +195,18 @@ class QuestionView extends Component {
     });
   }
 
-  newAnswerInputChangeHandler = event => {
-    this.newAnswer = {
-      author: Auth.getActiveUser(),
-      id: uuidv1(),
-      content: event.target.value,
-      questionId: this.state.currentQuestion.id
-    };
-  };
-
   submitNewAnswer = event => {
     event.preventDefault();
     const content = this.answerEditor.current.state.text;
 
     if (content && Validations.notStartingWithSpace.test(content)) {
-      this.newAnswer = {
-        author: Auth.getActiveUser(),
-        id: uuidv1(),
-        content: content,
-        questionId: this.state.currentQuestion.id
-      };
+      this.newAnswer = new AnswerEntity(
+        uuidv1(),
+        Auth.getActiveUser(),
+        content,
+        false,
+        this.state.currentQuestion.id
+      );
       this.context.addNewAnswer(this.newAnswer);
       event.target.reset();
       this.newAnswer = null;

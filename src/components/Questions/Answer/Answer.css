@@ -110,3 +110,17 @@
   position: absolute;
   bottom: 0.1px;
 }
+
+.answer-wrapper .date-label {
+  position: absolute;
+  left: 160px;
+  bottom: 12px;
+  font-family: "Montserrat";
+}
+.answer-wrapper .date-label span {
+  margin-left: 25px;
+}
+.answer-wrapper .date-label img {
+  position: absolute;
+  bottom: 0.1px;
+}

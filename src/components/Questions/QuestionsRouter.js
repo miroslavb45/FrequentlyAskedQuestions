@@ -122,7 +122,6 @@ class QuestionsRouter extends Component {
     let question = newQuestions.find(
       question => question.id === answer.questionId
     );
-    delete answer.questionId;
 
     question.answers.push(answer);
     this.setState({ question: newQuestions });

@@ -8,6 +8,7 @@ import deleteIcon from "../../../assets/icons/delete-icon.png";
 import editIcon from "../../../assets/icons/edit-icon.png";
 import correctAnswerIcon from "../../../assets/icons/correct-answer-icon.png";
 import answeredIcon from "../../../assets/icons/answered-icon.png";
+import dateIcon from "../../../assets/icons/date-icon.png";
 
 import Editor from "../../Editor/Editor";
 
@@ -44,6 +45,10 @@ class Answer extends Component {
             <div className="author-label">
               <img src={userIcon} alt="" />
               <span>{this.props.author}</span>
+            </div>
+            <div className="date-label">
+              <img src={dateIcon} alt="" />
+              <span>{this.props.createDate}</span>
             </div>
             {this.props.toggleCorrectAnswerButtonVisible ||
             this.props.isCorrect ? (
@@ -101,36 +106,6 @@ class Answer extends Component {
             : null}
         </div>
       </div>
-      // <div>
-      //   <p
-      //     contentEditable={this.state.editing}
-      //     onInput={this.contentChangeHandler}
-      //     suppressContentEditableWarning={true}
-      //   >
-      //     {this.state.content}
-      //   </p>
-      //   <p>{this.props.author}</p>
-      //   <p>{this.props.id}</p>
-      //   {this.props.isDeleteAllowed ? [
-      //       <button key="delteKey" onClick={() => this.props.onDelete(this.props.id)}>
-      //     Delete
-      //   </button>,
-      //   <button key="editKey"
-      //     onClick={() => {
-      //       this.answerUpdateHandler();
-      //       this.setState({ editing: !this.state.editing });
-      //     }}
-      //   >
-      //     {this.state.editing ? "Save" : "Edit"}
-      //   </button>
-      //    ] : (
-      //       null
-      //   )}
-      //   {this.props.toggleCorrectAnswerButtonVisible ? (
-      //      <button onClick={this.toggleCorrectAnswerHandler}>{this.props.isCorrect ? "Unmark" : "Mark as correct"}</button>
-      //   ) : null}
-
-      // </div>
     );
   }
 
@@ -150,10 +125,6 @@ class Answer extends Component {
   toggleCorrectAnswerHandler = () => {
     this.context.toggleCorrectAnswer(this.props.id, this.props.questionId);
   };
-
-  // componentDidMount(){
-  //   this.editor.current.setContent(this.state.newContent);
-  // }
 }
 
 export default Answer;
