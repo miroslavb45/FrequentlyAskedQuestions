@@ -67,3 +67,12 @@ main .sidebar {
 .Login .App {
   overflow: hidden;
 }
+
+.sidebar label{
+  cursor: pointer;
+  transition: font-size 0.1s;
+}
+
+.sidebar label:hover{
+  font-size: 14.8px;
+}

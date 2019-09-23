@@ -23,7 +23,7 @@
   background-color: #ffcc33;
 }
 
-.content {
+.question-preview-wrapper .content {
   padding: 12px;
   padding-top: 20px;
   padding-left: 25px;
@@ -32,23 +32,23 @@
   height: 146px;
 }
 
-.content h2 {
+.question-preview-wrapper .content h2 {
   color: #101820;
   font-family: "Montserrat";
   font-size: 20px;
   margin: 0;
 }
 
-.content h2:hover {
+.question-preview-wrapper .content h2:hover {
   cursor: pointer;
   color: #ffcc33;
 }
-.content .contentWrapper {
+.question-preview-wrapper .content .contentWrapper {
   overflow: hidden;
   height: 80px;
   margin-bottom: 20px;
 }
-.content .correct-answer-label {
+.question-preview-wrapper .content .correct-answer-label {
   font-family: "Montserrat";
   font-size: 16px;
   color: #33cc33;
@@ -60,7 +60,7 @@
   left: 4px;
 }
 
-.content .contentWrapper::before {
+.question-preview-wrapper .content .contentWrapper::before {
   background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, white 50%);
   content: "\200C";
   display: block;
@@ -126,18 +126,28 @@
   position: absolute;
   left: 30px;
 }
-
 .delete-button {
   position: absolute;
-  bottom: 10px;
-  right: 264px;
+  right: 214px;
   cursor: pointer;
-}
-
-.delete-button span {
-  position: absolute;
-  top: 1px;
-  margin-left: 5px;
+  bottom: 12px;
   font-family: "Montserrat";
   color: #ec0e18;
+}
+.delete-button img{
+  position: absolute;
+}
+.delete-button span{
+  margin-left: 16px;
+}
+.answers-wrapper{
+  margin: 50px;
+  margin-top: 14px;
+}
+
+.answers-wrapper h2{
+  font-family: 'Montserrat';
+  font-size: 24px;
+  font-weight: 400;
+  margin: 0;
 }

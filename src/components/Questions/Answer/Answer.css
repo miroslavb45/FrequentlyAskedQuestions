@@ -1,0 +1,112 @@
+.answer-wrapper {
+  position: relative;
+  min-height: 150px;
+  font-family: "Montserrat";
+  -webkit-box-shadow: 0px 0px 5px -1px rgba(0, 0, 0, 0.26);
+  -moz-box-shadow: 0px 0px 5px -1px rgba(0, 0, 0, 0.26);
+  box-shadow: 0px 0px 5px -1px rgba(0, 0, 0, 0.26);
+  margin-bottom: 15px;
+}
+
+.answer-wrapper h2{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.answer-indicator {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 10px;
+  background-color: #f5c847;
+}
+
+.correct-answer {
+  background-color: #33cc33;
+}
+.answer-content {
+  font-size: 14px;
+  font-family: "Montserrat";
+  padding-left: 37px;
+  padding-bottom: 40px;
+  padding-right: 27px;
+  padding-top: 20px;
+}
+.answer-content .ql-editor {
+  padding: 0;
+  font-family: "Montserrat";
+}
+
+.answer-labels {
+  position: absolute;
+  bottom: 0;
+  left: 37px;
+  right: 27px;
+}
+.answer-labels .author-label {
+  position: absolute;
+  bottom: 12px;
+}
+.answer-labels .author-label span {
+  position: absolute;
+  left: 24px;
+  bottom: 1px;
+}
+
+.answer-wrapper .delete-question-button {
+  position: absolute;
+  right: 15px;
+  cursor: pointer;
+  bottom: 12px;
+  font-family: "Montserrat";
+  color: #ec0e18;
+}
+
+.answer-wrapper .delete-question-button img {
+  position: absolute;
+}
+
+.answer-wrapper .delete-question-button span {
+  margin-left: 16px;
+}
+
+.answer-wrapper .edit-button {
+  position: absolute;
+  right: 100px;
+  cursor: pointer;
+  bottom: 12px;
+  font-family: "Montserrat";
+  color: #ffcc33;
+}
+.answer-wrapper .edit-button img {
+  position: absolute;
+}
+
+.answer-wrapper .save-button {
+  position: absolute;
+  right: 100px;
+  cursor: pointer;
+  bottom: 12px;
+  font-family: "Montserrat";
+  color: #33cc33;
+}
+.answer-wrapper .save-button img {
+  position: absolute;
+}
+
+.answer-wrapper .correct-answer-label {
+  position: absolute;
+  right: 140px;
+  cursor: pointer;
+  bottom: 12px;
+  font-family: "Montserrat";
+  color: #33cc33;
+}
+.answer-wrapper .correct-answer-label span {
+  margin-left: 25px;
+}
+.answer-wrapper .correct-answer-label img {
+  position: absolute;
+  bottom: 0.1px;
+}

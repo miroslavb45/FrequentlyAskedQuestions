@@ -1,9 +1,9 @@
 class AnswerEntity {
-  constructor(id, author, content) {
+  constructor(id, author, content, isCorrect = false) {
     this.id = id;
     this.author = author;
     this.content = content;
-    this.isCorrect = false;
+    this.isCorrect = isCorrect;
   }
 }
 export default AnswerEntity;

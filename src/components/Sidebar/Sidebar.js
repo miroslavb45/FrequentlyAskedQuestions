@@ -3,6 +3,7 @@ import "./Sidebar.css";
 import menuIcon from "../../assets/icons/menu-icon.png";
 import addNewIcon from "../../assets/icons/new-question.png";
 import questionsIcon from "../../assets/icons/questions.png";
+import ownQuestionsIcon from "../../assets/icons/own-icon.png";
 import { withRouter } from "react-router-dom";
 
 import { NavLink } from "react-router-dom";
@@ -39,21 +40,21 @@ const Sidebar = props => {
         <NavLink to="/new-question">
           <span>
             <img alt="" src={addNewIcon} />
-            <label style={{ top: " 3px" }}>New Question</label>
+            <label style={{ top: "3px" }}>New Question</label>
           </span>
         </NavLink>
         <NavLink to="/questions">
           <span>
             <img alt="" src={questionsIcon} />
-            <label style={{ top: " 1px", marginLeft: "16.6px" }}>
+            <label style={{ top: "1px", marginLeft: "16.6px" }}>
               Questions
             </label>
           </span>
         </NavLink>
         <NavLink to="/my-questions">
           <span>
-            <img alt="" src={questionsIcon} />
-            <label style={{ top: " 1px", marginLeft: "16.6px" }}>
+            <img alt="" src={ownQuestionsIcon} />
+            <label style={{ top: "1px", marginLeft: "15px" }}>
               My Questions
             </label>
           </span>

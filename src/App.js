@@ -5,7 +5,7 @@ import Logout from "./components/Authentication/Logout";
 import QuestionsRouter from "./components/Questions/QuestionsRouter";
 import { BrowserRouter } from "react-router-dom";
 import { Route } from "react-router-dom";
-import dots from "./assets/dots-png-3.png";
+import dots from "./assets/dots.png";
 
 class FrequentlyAskedQuestions extends Component {
   render() {

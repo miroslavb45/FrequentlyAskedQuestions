@@ -1,0 +1,232 @@
+.question-view-wrapper {
+  min-height: 500px;
+  background-color: white;
+  margin-top: 65px;
+  margin-left: 30px;
+  margin-right: 30px;
+  padding-bottom: 30px;
+}
+
+
+.question-view-wrapper .question-wrapper {
+  border-bottom: 1px solid #4d4d4d57;  
+  display: flex;
+  background-color: #fefefe;
+  position: relative;
+  -webkit-box-shadow: 0px 0px 5px -1px rgba(0, 0, 0, 0.26);
+  -moz-box-shadow: 0px 0px 5px -1px rgba(0, 0, 0, 0.26);
+  box-shadow: 0px 0px 5px -1px rgba(0, 0, 0, 0.26);
+
+}
+.question-view-wrapper .question-wrapper .ql-editor{
+  padding: 0;
+}
+
+.indicator {
+  width: 28px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #ffcc33;
+}
+
+.question-view-wrapper .question-wrapper .content {
+  padding-bottom: 45px;
+  padding-top: 20px;
+  padding-left: 25px;
+  margin-right: 190px;
+  margin-left: 29px;
+  width: 100%;
+}
+
+.question-view-wrapper .question-wrapper .content h2 {
+  color: #101820;
+  font-family: "Montserrat";
+  font-size: 20px;
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.question-view-wrapper .question-wrapper .content .contentWrapper {
+padding-right: 10px;
+}
+.question-wrapper  .content .correct-answer-label {
+  font-family: "Montserrat";
+  font-size: 16px;
+  color: #33cc33;
+  position: absolute;
+  bottom: 12px;
+
+}
+
+.indicator img {
+  position: absolute;
+  bottom: 12px;
+  left: 4px;
+}
+
+.question-wrapper  .content p {
+  color: #101820;
+  font-family: "Montserrat";
+  font-size: 14px;
+  line-height: 1.2;
+  margin-top: 15px;
+}
+
+.labels {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 177px;
+  border-left: 1px solid #ffcc33;
+  padding: 10px;
+  padding-top: 22px;
+  font-family: "Montserrat";
+  font-weight: 400;
+}
+
+.labels .answers-label span {
+  position: absolute;
+  left: 30px;
+  top: 2px;
+}
+
+.labels .answers-label {
+  position: relative;
+  margin-left: 2px;
+}
+.labels .date-label {
+  position: relative;
+  margin-top: 15px;
+  margin-left: 2px;
+}
+.labels .date-label span {
+  position: absolute;
+  left: 30px;
+  top: 3px;
+}
+.labels .date-label img {
+  position: absolute;
+  left: 1px;
+}
+
+.labels .author-label {
+  position: absolute;
+  bottom: 10px;
+  left: 13px;
+}
+.labels .author-label span {
+  position: absolute;
+  left: 30px;
+}
+.delete-question-button {
+  position: absolute;
+  right: 214px;
+  cursor: pointer;
+  bottom: 12px;
+  font-family: "Montserrat";
+  color: #ec0e18;
+}
+.delete-question-button img{
+  position: absolute;
+}
+.delete-question-button span{
+  margin-left: 16px;
+}
+
+
+.labels .edit-button {
+  position: absolute;
+  right: 300px;
+  cursor: pointer;
+  bottom: 12px;
+  font-family: "Montserrat";
+  color: #ffcc33;
+}
+.labels .edit-button img{
+  position: absolute;
+}
+
+.labels .save-button {
+  position: absolute;
+  right: 300px;
+  cursor: pointer;
+  bottom: 12px;
+  font-family: "Montserrat";
+  color: #33cc33;
+}
+.labels .save-button img{
+  position: absolute;
+
+}
+.question-view-wrapper .edit-button span {
+    margin-left: 20px;
+}
+.question-view-wrapper .save-button span{
+    margin-left: 23px;
+}
+
+.answer-wrappers h2{
+  margin-bottom: 13px;
+}
+
+.new-answer-wrapper {
+  margin-left: 0;
+  margin-right: 0;
+  position: relative;
+  padding-top: 25px;
+}
+
+.new-answer-label-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 55px;
+  background-color: #f5c847;
+}
+.new-answer-label-wrapper h1 {
+  font-family: "Montserrat";
+  font-size: 24px;
+  color: #182027;
+  margin-left: 25px;
+  margin-top: 14px;
+  font-weight: 400;
+}
+
+.new-answer-wrapper form {
+  padding-top: 40px;
+}
+.title-wrapper {
+  display: grid;
+}
+
+.new-answer-wrapper .ql-container{
+    min-height: 150px;
+}
+
+.question-wrapper label {
+  font-size: 14px;
+  font-family: "Montserrat";
+  line-height: 2;
+}
+#add-answer-button {
+  margin-top: 10px;
+  font-family: "Montserrat";
+  font-size: 16px;
+  width: 240px;
+  border: none;
+  background-color: #f5c847;
+  padding: 10px;
+}
+#add-answer-button:hover {
+  cursor: pointer;
+  background-color: #4d4d4d;
+  color: #f5c847;
+  outline: none;
+  -webkit-box-shadow: 11px 10px 16px -14px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 11px 10px 16px -14px rgba(0, 0, 0, 0.75);
+  box-shadow: 11px 10px 16px -14px rgba(0, 0, 0, 0.75);
+}

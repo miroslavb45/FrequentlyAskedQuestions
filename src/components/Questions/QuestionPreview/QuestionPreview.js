@@ -6,6 +6,16 @@ import dateIcon from "../../../assets/icons/date-icon.png";
 import answersIcon from "../../../assets/icons/answers-icon.png";
 import deleteIcon from "../../../assets/icons/delete-icon.png";
 
+
+const stripHtml = (html) =>{
+  // Create a new div element
+  var temporalDivElement = document.createElement("div");
+  // Set the HTML content with the providen
+  temporalDivElement.innerHTML = html;
+  // Retrieve the text property of the element (cross-browser support)
+  return temporalDivElement.textContent || temporalDivElement.innerText || "";
+}
+
 const QuestionPreview = props => {
   return (
     <div className="question-preview-wrapper">
@@ -18,7 +28,7 @@ const QuestionPreview = props => {
       <div className="content">
         <h2 onClick={() => props.onClick(props.id)}>{props.title}</h2>
         <div className="contentWrapper">
-          <p>{props.content}</p>
+          <p>{stripHtml(props.content)}</p>
         </div>
         <span className="correct-answer-label">
           {props.hasCorrectAnswer ? "Question answered" : null}

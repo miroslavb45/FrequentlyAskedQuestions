@@ -21,6 +21,7 @@
   background-color: rgb(239, 239, 238);
   border-radius: 17px;
   box-shadow: 0px 8px 29.76px 2.24px rgba(48, 48, 48, 0.35);
+  z-index: 10;
 }
 
 .wrapper h1 {

@@ -14,6 +14,7 @@ header h1 {
   top: 9px;
   right: 245px;
 }
+
 .searchBar input {
   width: 270px;
   border-radius: 5px;
@@ -24,6 +25,7 @@ header h1 {
   padding-left: 9px;
   font-size: 14px;
 }
+
 .searchBar img {
   position: absolute;
   top: 5px;
@@ -35,6 +37,7 @@ header h1 {
   right: 34px;
   top: 10px;
 }
+
 .userInfo {
   position: absolute;
   top: 5px;

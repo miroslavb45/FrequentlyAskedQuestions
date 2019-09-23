@@ -1,7 +1,15 @@
 import React, { Component } from "react";
-import {Validations} from "../../../utils/Utils";
+import { Validations } from "../../../utils/Utils";
 import QuestionsContext from "../../../context/QuestionsContext";
+import "./Answer.css";
+import userIcon from "../../../assets/icons/user-icon.png";
+import saveIcon from "../../../assets/icons/save-icon.png";
+import deleteIcon from "../../../assets/icons/delete-icon.png";
+import editIcon from "../../../assets/icons/edit-icon.png";
+import correctAnswerIcon from "../../../assets/icons/correct-answer-icon.png";
+import answeredIcon from "../../../assets/icons/answered-icon.png";
 
+import Editor from "../../Editor/Editor";
 
 class Answer extends Component {
   static contextType = QuestionsContext;
@@ -9,43 +17,103 @@ class Answer extends Component {
     editing: false,
     content: this.props.content
   };
+
+  editor = React.createRef();
   render() {
     return (
       <div>
-        <p
-          contentEditable={this.state.editing}
-          onInput={this.contentChangeHandler}
-          suppressContentEditableWarning={true}
-        >
-          {this.state.content}
-        </p>
-        <p>{this.props.author}</p>
-        <p>{this.props.id}</p>
-        {this.props.isDeleteAllowed ? [
-            <button key="delteKey" onClick={() => this.props.onDelete(this.props.id)}>
-          Delete
-        </button>,
-        <button key="editKey"
-          onClick={() => {
-            this.answerUpdateHandler();
-            this.setState({ editing: !this.state.editing });
-          }}
-        >
-          {this.state.editing ? "Save" : "Edit"}
-        </button>
-         ] : (
-            null
-        )}
-        {this.props.toggleCorrectAnswerButtonVisible ? (
-           <button onClick={this.toggleCorrectAnswerHandler}>{this.props.isCorrect ? "Unmark" : "Mark as correct"}</button>
-        ) : null}
-        
+        <div className="answer-wrapper">
+          <div
+            className={
+              this.props.isCorrect
+                ? "answer-indicator correct-answer"
+                : "answer-indicator"
+            }
+          ></div>
+          <div className="answer-content">
+            <Editor
+              value={this.props.content}
+              theme="bubble"
+              ref={this.editor}
+              readOnly={!this.state.editing}
+              editable={this.state.editing}
+              onChange={this.contentChangeHandler}
+            ></Editor>
+          </div>
+          <div className="answer-labels">
+            <div className="author-label">
+              <img src={userIcon} alt="" />
+              <span>{this.props.author}</span>
+            </div>
+            {this.props.toggleCorrectAnswerButtonVisible || this.props.isCorrect ? (
+              <div className="label">
+
+              <div className="correct-answer-label" style={!this.props.toggleCorrectAnswerButtonVisible ? {right: 0} : null} onClick={this.props.toggleCorrectAnswerButtonVisible ? this.toggleCorrectAnswerHandler : null}>
+                <img src={this.props.isCorrect ? correctAnswerIcon : answeredIcon} alt="" />
+                <span>{this.props.toggleCorrectAnswerButtonVisible && !this.props.isCorrect ? "Mark as correct" : "Correct answer"}</span>
+              </div>
+              </div>
+            ) : null}
+          </div>
+          {this.props.isDeleteAllowed
+            ? [
+                <div
+                  key="edit-button"
+                  className={this.state.editing ? "save-button" : "edit-button"}
+                  onClick={() => {
+                    this.answerUpdateHandler();
+                    this.setState({ editing: !this.state.editing });
+                  }}
+                >
+                  <img src={this.state.editing ? saveIcon : editIcon} alt="" />{" "}
+                  <span>{this.state.editing ? "Save" : "Edit"}</span>
+                </div>,
+                <div
+                  key="delete-question-button"
+                  className="delete-question-button"
+                  onClick={() => this.props.onDelete(this.props.id)}
+                >
+                  <img src={deleteIcon} alt="" /> <span>Delete</span>
+                </div>
+              ]
+            : null}
+        </div>
       </div>
+      // <div>
+      //   <p
+      //     contentEditable={this.state.editing}
+      //     onInput={this.contentChangeHandler}
+      //     suppressContentEditableWarning={true}
+      //   >
+      //     {this.state.content}
+      //   </p>
+      //   <p>{this.props.author}</p>
+      //   <p>{this.props.id}</p>
+      //   {this.props.isDeleteAllowed ? [
+      //       <button key="delteKey" onClick={() => this.props.onDelete(this.props.id)}>
+      //     Delete
+      //   </button>,
+      //   <button key="editKey"
+      //     onClick={() => {
+      //       this.answerUpdateHandler();
+      //       this.setState({ editing: !this.state.editing });
+      //     }}
+      //   >
+      //     {this.state.editing ? "Save" : "Edit"}
+      //   </button>
+      //    ] : (
+      //       null
+      //   )}
+      //   {this.props.toggleCorrectAnswerButtonVisible ? (
+      //      <button onClick={this.toggleCorrectAnswerHandler}>{this.props.isCorrect ? "Unmark" : "Mark as correct"}</button>
+      //   ) : null}
+
+      // </div>
     );
   }
 
-  contentChangeHandler = event => {
-    this.setState({ newContent: event.target.innerText });
+  contentChangeHandler = content => {
+    this.setState({ newContent: content });
   };
 
   answerUpdateHandler = () => {
@@ -59,7 +127,11 @@ class Answer extends Component {
   };
   toggleCorrectAnswerHandler = () => {
     this.context.toggleCorrectAnswer(this.props.id, this.props.questionId);
-  } 
+  };
+
+  // componentDidMount(){
+  //   this.editor.current.setContent(this.state.newContent);
+  // }
 }
 
 export default Answer;

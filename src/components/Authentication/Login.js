@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import userPlacholder from "../../assets/user-icon.png";
-import dots from "../../assets/dots-png-3.png";
-import questionMarkTop from "../../assets/question-mark-top-svg.svg";
+import dots from "../../assets/dots.png";
+import questionMarkTop from "../../assets/question-mark-top.svg";
 import "./Login.css";
 import Auth from "../../authentication/Auth";
 

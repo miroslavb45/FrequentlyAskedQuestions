@@ -50,8 +50,6 @@ class QuestionList extends Component {
               />
             );
           })}
-        {/* 
-        <QuestionsCreate {...this.props} /> */}
       </div>
     );
   }

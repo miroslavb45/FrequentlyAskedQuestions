@@ -1,0 +1,75 @@
+.new-question-wrapper {
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-top: 70px;
+  min-height: 500px;
+  background: white;
+  position: relative;
+  padding: 25px;
+}
+
+.new-question-label-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 55px;
+  background-color: #f5c847;
+}
+.new-question-label-wrapper h1 {
+  font-family: "Montserrat";
+  font-size: 24px;
+  color: #182027;
+  margin-left: 25px;
+  margin-top: 14px;
+  font-weight: 400;
+}
+
+.new-question-wrapper form {
+  padding-top: 40px;
+}
+.title-wrapper {
+  display: grid;
+}
+
+.title-wrapper label {
+  font-size: 14px;
+  font-family: "Montserrat";
+  line-height: 2;
+}
+
+.title-input {
+  border-radius: 5px;
+  border: 0.6px solid #f5c847;
+  font-size: 14px;
+  font-family: "Montserrat";
+  outline: none;
+  padding: 8px;
+}
+.new-question-wrapper .ql-container{
+    min-height: 300px;
+}
+
+.question-wrapper label {
+  font-size: 14px;
+  font-family: "Montserrat";
+  line-height: 2;
+}
+#add-question-button {
+  margin-top: 10px;
+  font-family: "Montserrat";
+  font-size: 16px;
+  width: 240px;
+  border: none;
+  background-color: #f5c847;
+  padding: 10px;
+}
+#add-question-button:hover {
+  cursor: pointer;
+  background-color: #4d4d4d;
+  color: #f5c847;
+  outline: none;
+  -webkit-box-shadow: 11px 10px 16px -14px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 11px 10px 16px -14px rgba(0, 0, 0, 0.75);
+  box-shadow: 11px 10px 16px -14px rgba(0, 0, 0, 0.75);
+}
