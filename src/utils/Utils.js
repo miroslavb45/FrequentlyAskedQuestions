@@ -1,10 +1,10 @@
-import Auth from '../authentication/Auth';
+import Auth from "../authentication/Auth";
 export const Validations = {
-    notStartingWithSpace: /^(?!\s*$).+/
+  notStartingWithSpace: /^(?!\s*$).+/
 };
 
 export function isEditableByCurrentUser(author) {
-    const activeUser = Auth.getActiveUser();
+  const activeUser = Auth.getActiveUser();
 
-    return activeUser === author;
-};
+  return activeUser === author;
+}

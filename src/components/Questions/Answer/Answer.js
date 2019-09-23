@@ -45,13 +45,35 @@ class Answer extends Component {
               <img src={userIcon} alt="" />
               <span>{this.props.author}</span>
             </div>
-            {this.props.toggleCorrectAnswerButtonVisible || this.props.isCorrect ? (
+            {this.props.toggleCorrectAnswerButtonVisible ||
+            this.props.isCorrect ? (
               <div className="label">
-
-              <div className="correct-answer-label" style={!this.props.toggleCorrectAnswerButtonVisible ? {right: 0} : null} onClick={this.props.toggleCorrectAnswerButtonVisible ? this.toggleCorrectAnswerHandler : null}>
-                <img src={this.props.isCorrect ? correctAnswerIcon : answeredIcon} alt="" />
-                <span>{this.props.toggleCorrectAnswerButtonVisible && !this.props.isCorrect ? "Mark as correct" : "Correct answer"}</span>
-              </div>
+                <div
+                  className="correct-answer-label"
+                  style={
+                    !this.props.toggleCorrectAnswerButtonVisible
+                      ? { right: 0 }
+                      : null
+                  }
+                  onClick={
+                    this.props.toggleCorrectAnswerButtonVisible
+                      ? this.toggleCorrectAnswerHandler
+                      : null
+                  }
+                >
+                  <img
+                    src={
+                      this.props.isCorrect ? correctAnswerIcon : answeredIcon
+                    }
+                    alt=""
+                  />
+                  <span>
+                    {this.props.toggleCorrectAnswerButtonVisible &&
+                    !this.props.isCorrect
+                      ? "Mark as correct"
+                      : "Correct answer"}
+                  </span>
+                </div>
               </div>
             ) : null}
           </div>

@@ -46,8 +46,8 @@
   outline: none;
   padding: 8px;
 }
-.new-question-wrapper .ql-container{
-    min-height: 300px;
+.new-question-wrapper .ql-container {
+  min-height: 300px;
 }
 
 .question-wrapper label {

@@ -10,6 +10,24 @@ class NewEditor extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.quill = React.createRef();
   }
+ modules = {
+    toolbar: [
+      [{ font: [] }, { size: [] }],
+      ["bold", "italic", "underline", "strike"],
+      [{ color: [] }, { background: [] }],
+      [{ script: "super" }, { script: "sub" }],
+      [{ header: "1" }, { header: "2" }, "blockquote", "code-block"],
+      [
+        { list: "ordered" },
+        { list: "bullet" },
+        { indent: "-1" },
+        { indent: "+1" }
+      ],
+      ["direction", { align: [] }],
+      ["link", "image", "video", "formula"],
+      ["clean"]
+    ]
+  };
 
   componentDidMount() {
     if (this.props.value) {
@@ -31,12 +49,14 @@ class NewEditor extends React.Component {
   };
 
   render() {
+   
     return (
       <ReactQuill
         ref={this.quill}
         onChange={this.handleChange}
         readOnly={this.props.readOnly}
         theme={this.props.theme}
+        modules={this.modules}
       />
     );
   }
