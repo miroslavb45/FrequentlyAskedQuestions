@@ -65,8 +65,8 @@ class QuestionList extends Component {
     });
   };
 
-  onDelete = question => {
-    this.context.deleteQuestion(question.id, newQuestions => {
+  onDelete = questionId => {
+    this.context.deleteQuestion(questionId, newQuestions => {
       this.setState({ questions: newQuestions });
     });
   };

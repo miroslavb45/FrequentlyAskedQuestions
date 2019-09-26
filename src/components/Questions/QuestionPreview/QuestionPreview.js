@@ -30,7 +30,7 @@ const QuestionPreview = props => {
           {props.hasCorrectAnswer ? "Question answered" : null}
         </span>
         {props.editable ? (
-          <div className="delete-button" onClick={props.onDelete}>
+          <div className="delete-button" onClick={() => props.onDelete(props.id)}>
             <img src={deleteIcon} alt="" /> <span>Delete</span>
           </div>
         ) : null}
